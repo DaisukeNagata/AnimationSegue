@@ -1,5 +1,5 @@
 import 'package:animation_segue/ex_interface.dart';
-import 'package:animation_segue/extensions.dart';
+import 'package:animation_segue/ex_extensions.dart';
 import 'package:animation_segue/main.dart';
 import 'package:flutter/material.dart';
 import 'package:animation_segue/ex_widget.dart';
@@ -46,7 +46,8 @@ class _MyHomePageState4 extends State<MyHomePage4>
         children: [
           TextButton(
             onPressed: () {
-              segue(const MyHomePage(), '/lib/my_home_page');
+              segue(
+                  const MyHomePage(title: 'segue_page4'), '/lib/my_home_page');
             },
             onLongPress: () {
               Navigator.of(context).pop();

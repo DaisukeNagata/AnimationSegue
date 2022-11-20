@@ -1,5 +1,5 @@
 import 'package:animation_segue/ex_interface.dart';
-import 'package:animation_segue/extensions.dart';
+import 'package:animation_segue/ex_extensions.dart';
 import 'package:animation_segue/my_home_page3.dart';
 import 'package:flutter/material.dart';
 import 'package:animation_segue/ex_widget.dart';

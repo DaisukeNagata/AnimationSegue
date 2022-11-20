@@ -1,5 +1,6 @@
+import 'package:animation_segue/ex_interface.dart';
 import 'package:flutter/material.dart';
-import 'package:animation_segue/extensions.dart';
+import 'package:animation_segue/ex_extensions.dart';
 import 'package:animation_segue/my_home_page2.dart';
 import 'package:animation_segue/ex_widget.dart';
 
@@ -14,19 +15,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MyHomePage(),
+      home: MyHomePage(
+        title: '',
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
+  const MyHomePage({super.key, required this.title});
+  final String? title;
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with TickerProviderStateMixin
+    implements ExInterFace {
   late Animation<double> animation;
   late AnimationController controller;
 
@@ -59,7 +64,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         children: [
           TextButton(
             onPressed: () {
-              _segue();
+              segue(const MyHomePage2(), '/lib/my_home_page2');
+            },
+            onLongPress: () {
+              if (widget.title?.isNotEmpty ?? false) {
+                Navigator.of(context).pop();
+              }
             },
             child: const Center(
               child: Text(
@@ -84,8 +94,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 
-  void _segue() {
-    controller.segue(const MyHomePage2(), context, '/lib/my_home_page2', () {
+  @override
+  void segue(Widget w, String path) {
+    controller.segue(w, context, path, () {
       controller.reverse();
     });
   }
