@@ -1,32 +1,19 @@
-import 'package:flutter/material.dart';
+import 'package:animation_segue/ex_interface.dart';
 import 'package:animation_segue/extensions.dart';
-import 'package:animation_segue/my_home_page2.dart';
+import 'package:animation_segue/my_home_page4.dart';
+import 'package:flutter/material.dart';
 import 'package:animation_segue/ex_widget.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class MyHomePage3 extends StatefulWidget {
+  const MyHomePage3({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage3> createState() => _MyHomePageState3();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+class _MyHomePageState3 extends State<MyHomePage3>
+    with TickerProviderStateMixin
+    implements ExInterFace {
   late Animation<double> animation;
   late AnimationController controller;
 
@@ -59,11 +46,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         children: [
           TextButton(
             onPressed: () {
-              _segue();
+              segue(const MyHomePage4(), '/lib/my_home_page4');
+            },
+            onLongPress: () {
+              Navigator.of(context).pop();
             },
             child: const Center(
               child: Text(
-                'segue_page1',
+                'segue_page3',
                 style: TextStyle(
                   color: Colors.black,
                 ),
@@ -74,8 +64,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             animation: animation,
             builder: (context, child) {
               return ExWidget(
-                x: animation.value,
-                y: 0,
+                x: (MediaQuery.of(context).size.width - 100) - animation.value,
+                y: MediaQuery.of(context).size.height - 100,
               );
             },
           ),
@@ -84,8 +74,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 
-  void _segue() {
-    controller.segue(const MyHomePage2(), context, '/lib/my_home_page2', (_) {
+  @override
+  void segue(Widget w, String path) {
+    controller.segue(w, context, path, (_) {
       controller.reverse();
     });
   }
