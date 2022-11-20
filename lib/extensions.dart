@@ -18,7 +18,7 @@ extension Transition on AnimationController {
     Widget w,
     BuildContext context,
     String path,
-    Function(String) callback,
+    Function() callback,
   ) {
     forward().whenComplete(() {
       Navigator.push(
@@ -38,7 +38,7 @@ extension Transition on AnimationController {
           },
         ),
       ).then(
-        (_) => callback(path),
+        (_) => callback(),
       );
     });
     return this;

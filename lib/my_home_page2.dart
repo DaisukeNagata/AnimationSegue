@@ -76,7 +76,7 @@ class _MyHomePageState2 extends State<MyHomePage2>
 
   @override
   void segue(Widget w, String path) {
-    controller.segue(w, context, path, (_) {
+    controller.segue(w, context, path, () {
       controller.reverse();
     });
   }

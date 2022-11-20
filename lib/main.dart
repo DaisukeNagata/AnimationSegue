@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   }
 
   void _segue() {
-    controller.segue(const MyHomePage2(), context, '/lib/my_home_page2', (_) {
+    controller.segue(const MyHomePage2(), context, '/lib/my_home_page2', () {
       controller.reverse();
     });
   }
